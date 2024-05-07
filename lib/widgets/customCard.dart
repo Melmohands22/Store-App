@@ -16,7 +16,7 @@ class CustomCard extends StatelessWidget {
             BoxShadow(
                 blurRadius: 40,
                 offset: Offset(1, 1),
-                spreadRadius: 0,
+                spreadRadius: 20,
                 color: Colors.grey.withOpacity(0.1))
           ]),
           child: Card(
@@ -30,10 +30,10 @@ class CustomCard extends StatelessWidget {
                   children: [
                     Text(
                       'mohamed elmo',
-                      style: TextStyle(fontSize: 18, color: Colors.grey),
+                      style: TextStyle(fontSize: 16, color: Colors.grey),
                     ),
                     SizedBox(
-                      height: 8.0,
+                      height: 0.3,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -55,11 +55,12 @@ class CustomCard extends StatelessWidget {
               )),
         ),
         Positioned(
-          right: 32,
-          top: -80,
+          right: 3.0,
+          top: -60,
           child: Image.network(
             'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
-            height: 100,
+            height: 90,
+            width: 100,
           ),
         )
       ],

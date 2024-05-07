@@ -43,7 +43,7 @@ class _HomeViewState extends State<HomeView> {
             clipBehavior: Clip.none,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 1.8,
+                childAspectRatio: 1.3,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 100),
             itemBuilder: (context, index) {
