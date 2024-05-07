@@ -42,16 +42,21 @@ class _HomeViewState extends State<HomeView> {
             return Container(
               height: 130,
               width: 220,
+              decoration: BoxDecoration(boxShadow: [
+                BoxShadow(
+                    blurRadius: 40,
+                    offset: Offset(10, 10),
+                    spreadRadius: 0,
+                    color: Colors.grey.withOpacity(0.2))
+              ]),
               child: Card(
                   color: Colors.white,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(
-                          height: 74,
-                        ),
                         Text(
                           'mohamed elmo',
                           style: TextStyle(fontSize: 18, color: Colors.grey),
