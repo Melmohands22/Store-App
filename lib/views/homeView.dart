@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:store_app/widgets/customCard.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -14,6 +15,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
           actions: [
             IconButton(
@@ -35,56 +37,19 @@ class _HomeViewState extends State<HomeView> {
               ),
             ],
           )),
-      body: GridView.builder(
-          gridDelegate:
-              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-          itemBuilder: (context, index) {
-            return Container(
-              height: 130,
-              width: 220,
-              decoration: BoxDecoration(boxShadow: [
-                BoxShadow(
-                    blurRadius: 40,
-                    offset: Offset(10, 10),
-                    spreadRadius: 0,
-                    color: Colors.grey.withOpacity(0.2))
-              ]),
-              child: Card(
-                  color: Colors.white,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'mohamed elmo',
-                          style: TextStyle(fontSize: 18, color: Colors.grey),
-                        ),
-                        SizedBox(
-                          height: 16,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              r'$220',
-                              style:
-                                  TextStyle(fontSize: 18, color: Colors.black),
-                            ),
-                            IconButton(
-                                onPressed: () {},
-                                icon: Icon(
-                                  FontAwesomeIcons.solidHeart,
-                                  color: Colors.red,
-                                ))
-                          ],
-                        )
-                      ],
-                    ),
-                  )),
-            );
-          }),
+      body: Padding(
+        padding: const EdgeInsets.only(left: 16, right: 16, top: 65),
+        child: GridView.builder(
+            clipBehavior: Clip.none,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 1.8,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 100),
+            itemBuilder: (context, index) {
+              return CustomCard();
+            }),
+      ),
     );
   }
 }
