@@ -1,15 +1,21 @@
-import 'package:http/http.dart' as http;
+import 'package:store_app/helper/apiClass.dart';
+import 'package:store_app/models/productModel.dart';
 
 class AddProduct {
-  Future<List<dynamic>> postProduct() async {
-    http.Response response =
-        await http.post(Uri.parse('https://fakestoreapi.com/products'), body: {
-      'title': 'test',
-      'price': '13.5',
-      'description': 'lorem ipsum set',
-      'image': 'https://i.pravatar.cc',
-      'category': 'electronic',
+  Future<ProductModel> addProduct({
+    required String title,
+    required String price,
+    required String description,
+    required String image,
+    required String category,
+  }) async {
+    Future data = Api().post(url: 'https://fakestoreapi.com/products', body: {
+      'title': title,
+      'price': price,
+      'description': description,
+      'image': image,
+      'category': category
     });
-    print(response.body);
+    return ProductModel.fromJson(data);
   }
 }
