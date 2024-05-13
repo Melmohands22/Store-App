@@ -1,10 +1,10 @@
 import 'package:store_app/helper/apiClass.dart';
 
-class AllCategorisService {
-  static String baseUrl = 'https://fakestoreapi.com';
+class AllCategoriesService {
+  Future<List<dynamic>> getAllCateogires() async {
+    List<dynamic> data =
+        await Api().get(url: 'https://fakestoreapi.com/products/categories');
 
-  Future<List<dynamic>> getAllCategories() async {
-    List<dynamic> data = await Api().get(Url: '$baseUrl/products/categories');
     return data;
   }
 }

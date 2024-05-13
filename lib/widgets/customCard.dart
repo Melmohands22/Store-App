@@ -1,69 +1,86 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:store_app/models/productModel.dart';
+import 'package:store_app/views/updateProductView.dart';
 
 class CustomCard extends StatelessWidget {
-  const CustomCard({
-    super.key,
-  });
+  CustomCard({
+    required this.product,
+    Key? key,
+  }) : super(key: key);
+
+  ProductModel product;
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      clipBehavior: Clip.none,
-      children: [
-        Container(
-          decoration: BoxDecoration(boxShadow: [
-            BoxShadow(
-                blurRadius: 40,
-                offset: Offset(1, 1),
-                spreadRadius: 20,
-                color: Colors.grey.withOpacity(0.1))
-          ]),
-          child: Card(
-              color: Colors.white,
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'mohamed elmo',
-                      style: TextStyle(fontSize: 16, color: Colors.grey),
-                    ),
-                    SizedBox(
-                      height: 0.3,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          r'$220',
-                          style: TextStyle(fontSize: 18, color: Colors.black),
-                        ),
-                        IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              FontAwesomeIcons.solidHeart,
-                              color: Colors.red,
-                            ))
-                      ],
-                    )
-                  ],
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, UpdateProductView.id, arguments: product);
+      },
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Container(
+            decoration: BoxDecoration(boxShadow: [
+              BoxShadow(
+                  blurRadius: 40,
+                  offset: Offset(1, 1),
+                  spreadRadius: 20,
+                  color: Colors.grey.withOpacity(0.1))
+            ]),
+            child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
                 ),
-              )),
-        ),
-        Positioned(
-          right: 3.0,
-          top: -60,
-          child: Image.network(
-            'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
-            height: 90,
-            width: 100,
+                elevation: 1,
+                color: Colors.white,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        product.description.substring(0, 6),
+                        style: TextStyle(fontSize: 16, color: Colors.grey),
+                      ),
+                      SizedBox(
+                        height: 3,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            r'$' '${product.price.toString()}',
+                            style: TextStyle(fontSize: 16, color: Colors.black),
+                          ),
+                          Container(
+                            height: 23,
+                            width: 23,
+                            child: IconButton(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.favorite,
+                                  color: Colors.red,
+                                )),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                )),
           ),
-        )
-      ],
+          Positioned(
+            right: 32,
+            top: -60,
+            child: Image.network(
+              product.image,
+              height: 100,
+              width: 100,
+            ),
+          )
+        ],
+      ),
     );
   }
 }
