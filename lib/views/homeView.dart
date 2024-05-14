@@ -13,34 +13,6 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pushNamed(HomeView.id);
-                },
-                child: Icon(Icons.home)),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pushNamed(SearchView.id);
-                },
-                child: Icon(Icons.search)),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pushNamed(FavoriteView.id);
-                },
-                child: Icon(Icons.favorite)),
-            label: 'Favorite',
-          ),
-        ],
-      ),
       backgroundColor: Colors.white,
       appBar: AppBar(
           actions: [

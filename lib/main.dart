@@ -16,6 +16,36 @@ class StoreApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      home: Scaffold(
+        bottomNavigationBar: BottomNavigationBar(
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pushNamed(HomeView.id);
+                  },
+                  child: Icon(Icons.home)),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pushNamed(SearchView.id);
+                  },
+                  child: Icon(Icons.search)),
+              label: 'Search',
+            ),
+            BottomNavigationBarItem(
+              icon: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pushNamed(FavoriteView.id);
+                  },
+                  child: Icon(Icons.favorite)),
+              label: 'Favorite',
+            ),
+          ],
+        ),
+      ),
       debugShowCheckedModeBanner: false,
       routes: {
         SplashScreen.id: (context) => SplashScreen(),

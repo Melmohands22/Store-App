@@ -40,6 +40,7 @@ class _SplashScreenState extends State<SplashScreen>
             child: LottieBuilder.asset(
                 "assets/lottie/Animation - 1715643110154.json")),
         Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               'Fancy ',
