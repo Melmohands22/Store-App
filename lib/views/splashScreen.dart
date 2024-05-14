@@ -6,7 +6,7 @@ import 'package:store_app/views/homeView.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
-
+  static String id = 'SplashScreen';
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
@@ -32,28 +32,36 @@ class _SplashScreenState extends State<SplashScreen>
     super.dispose();
   }
 
+  get splash => null;
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
-      splash: Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-          colors: [Color(0xffFFBE81), Color(0xffFFE3D2)],
-          begin: Alignment.topRight,
-          end: Alignment.bottomLeft,
-        )),
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Center(
-              child: LottieBuilder.asset(
-                  "assets/lottie/Animation - 1715643110154.json")),
-          Text('Fancy Store',
+      splash: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Expanded(
+            child: LottieBuilder.asset(
+                "assets/lottie/Animation - 1715643110154.json")),
+        Row(
+          children: [
+            Text(
+              'Fancy ',
               style: TextStyle(
-                  fontSize: 48,
-                  color: Colors.white,
-                  fontStyle: FontStyle.italic)),
-        ]),
-      ),
+                  fontSize: 40,
+                  color: Color(0xffFFAB31),
+                  fontStyle: FontStyle.italic),
+            ),
+            Text(
+              'Fancy ',
+              style: TextStyle(
+                  fontSize: 40,
+                  color: Color(0xffFFAB31),
+                  fontStyle: FontStyle.italic),
+            ),
+          ],
+        ),
+      ]),
       nextScreen: const HomeView(),
-      splashIconSize: 400,
+      backgroundColor: Color(0xffFFE3D2),
+      splashIconSize: 200,
+      centered: true,
     );
   }
 }
