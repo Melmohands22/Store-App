@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:store_app/main.dart';
+import 'package:store_app/views/homeView.dart';
 
 class SearchView extends StatelessWidget {
   const SearchView({super.key});

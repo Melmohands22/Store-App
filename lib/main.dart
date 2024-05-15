@@ -1,7 +1,11 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:store_app/views/favoriteView.dart';
 import 'package:store_app/views/homeView.dart';
+import 'package:store_app/views/productView.dart';
 import 'package:store_app/views/searchView.dart';
+import 'package:store_app/views/settingView.dart';
+import 'package:store_app/views/shopingView.dart';
 import 'package:store_app/views/splashScreen.dart';
 import 'package:store_app/views/updateProductView.dart';
 
@@ -16,38 +20,11 @@ class StoreApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        bottomNavigationBar: BottomNavigationBar(
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).pushNamed(HomeView.id);
-                  },
-                  child: Icon(Icons.home)),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).pushNamed(SearchView.id);
-                  },
-                  child: Icon(Icons.search)),
-              label: 'Search',
-            ),
-            BottomNavigationBarItem(
-              icon: GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).pushNamed(FavoriteView.id);
-                  },
-                  child: Icon(Icons.favorite)),
-              label: 'Favorite',
-            ),
-          ],
-        ),
-      ),
       debugShowCheckedModeBanner: false,
       routes: {
+        ProductView.id: (context) => ProductView(),
+        SettinView.id: (context) => SettinView(),
+        ShopingView.id: (context) => ShopingView(),
         SplashScreen.id: (context) => SplashScreen(),
         FavoriteView.id: (context) => FavoriteView(),
         HomeView.id: (context) => HomeView(),

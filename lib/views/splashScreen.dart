@@ -50,10 +50,10 @@ class _SplashScreenState extends State<SplashScreen>
                   fontStyle: FontStyle.italic),
             ),
             Text(
-              'Fancy ',
+              'Store',
               style: TextStyle(
                   fontSize: 40,
-                  color: Color(0xffFFAB31),
+                  color: Color.fromARGB(255, 20, 13, 2),
                   fontStyle: FontStyle.italic),
             ),
           ],

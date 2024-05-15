@@ -1,10 +1,13 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:store_app/main.dart';
 import 'package:store_app/models/productModel.dart';
 import 'package:store_app/services/getAllProductService.dart';
 import 'package:store_app/views/favoriteView.dart';
 import 'package:store_app/views/searchView.dart';
+import 'package:store_app/views/settingView.dart';
+import 'package:store_app/views/shopingView.dart';
 import 'package:store_app/widgets/customCard.dart';
 
 class HomeView extends StatelessWidget {
@@ -15,12 +18,6 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: Icon(FontAwesomeIcons.cartPlus, color: Colors.black),
-            )
-          ],
           elevation: 0,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -64,6 +61,91 @@ class HomeView extends StatelessWidget {
             }
           },
         ),
+      ),
+      bottomNavigationBar: CurvedNavigationBar(
+          backgroundColor: Colors.white,
+          color: Colors.orange,
+          height: 47,
+          items: [
+            Icon(
+              Icons.home,
+              color: Colors.black,
+              size: 38,
+            ),
+            Icon(Icons.search, color: Colors.black, size: 32),
+            Icon(Icons.shopping_cart, color: Colors.black, size: 32),
+            Icon(Icons.favorite, color: Colors.black, size: 32),
+            Icon(Icons.settings, color: Colors.black, size: 32),
+          ]),
+    );
+  }
+}
+
+class MainScreen extends StatefulWidget {
+  const MainScreen({Key? key}) : super(key: key);
+
+  @override
+  _MainScreenState createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  int _selectedIndex = 0;
+
+  final List<Widget> _screens = [
+    HomeView(),
+    SearchView(),
+    ShopingView(),
+    FavoriteView(),
+    SettinView(),
+  ];
+
+  Widget _buildNavItem(IconData icon, String label, String routeId) {
+    return Scaffold(
+      body: GestureDetector(
+        onTap: () {
+          Navigator.of(context).pushNamed(routeId);
+        },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              size: 30,
+              color: Colors.black,
+            ),
+            SizedBox(height: 5),
+            Text(
+              label,
+              style: TextStyle(fontSize: 12),
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: MainScreen(),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: _screens[_selectedIndex],
+      bottomNavigationBar: CurvedNavigationBar(
+        color: Colors.orange,
+        backgroundColor: Colors.white,
+        height: 50,
+        animationDuration: Duration(milliseconds: 200),
+        items: [
+          _buildNavItem(Icons.home, 'Home', HomeView.id),
+          _buildNavItem(Icons.search, 'Search', SearchView.id),
+          _buildNavItem(Icons.shopping_cart, 'Shopping', ShopingView.id),
+          _buildNavItem(Icons.favorite, 'Favorites', FavoriteView.id),
+          _buildNavItem(Icons.settings, 'Settings', SettinView.id),
+        ],
+        onTap: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
       ),
     );
   }
