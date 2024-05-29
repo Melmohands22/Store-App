@@ -6,13 +6,12 @@ class customCont extends StatelessWidget {
     required this.text,
     required this.height,
     required this.width,
-    required this.fontWeight,
     required this.color,
   });
   final String text;
   final double height;
   final double width;
-  final FontWeight fontWeight;
+
   final Color color;
   @override
   Widget build(BuildContext context) {
@@ -23,7 +22,7 @@ class customCont extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Text(
           text,
-          style: TextStyle(color: Colors.red),
+          style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
         ),
       ),
       decoration:

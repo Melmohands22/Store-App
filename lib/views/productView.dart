@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:store_app/models/productModel.dart';
+import 'package:store_app/views/favoriteView.dart';
 import 'package:store_app/widgets/custtomCont.dart';
 
 class ProductView extends StatefulWidget {
@@ -15,18 +17,23 @@ class ProductView extends StatefulWidget {
 }
 
 class _ProductViewState extends State<ProductView> {
+  final PageController pageController = PageController();
+
   @override
   Widget build(BuildContext context) {
-    // Retrieve the product from the route arguments
-    ProductModel product =
+    final ProductModel product =
         ModalRoute.of(context)!.settings.arguments as ProductModel;
 
-    // Calculate the discounted price
-    double discountedPrice = product.price * 0.60;
+    final double discountedPrice = product.price * 0.60;
 
     return Scaffold(
       appBar: AppBar(
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.more_vert))],
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.more_vert),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -34,12 +41,34 @@ class _ProductViewState extends State<ProductView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.network(
-                product.image,
+              Container(
                 height: 200,
-                width: double.infinity,
+                child: PageView.builder(
+                  controller: pageController,
+                  itemCount: 3,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Image.network(
+                      product.image,
+                      height: 200,
+                      width: double.infinity,
+                    );
+                  },
+                ),
               ),
-              SizedBox(height: 15),
+              const SizedBox(height: 8),
+              Center(
+                child: SmoothPageIndicator(
+                  controller: pageController, // Assign the PageController here
+                  count: 3,
+                  effect: ExpandingDotsEffect(
+                    dotHeight: 8,
+                    dotWidth: 8,
+                    activeDotColor: Colors.red,
+                    dotColor: Colors.grey.shade400,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 15),
               const Text(
                 'Size 7 UK',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
@@ -49,9 +78,8 @@ class _ProductViewState extends State<ProductView> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    customCont(
+                    const customCont(
                       text: '6 UK',
-                      fontWeight: FontWeight.normal,
                       height: 35,
                       width: 54,
                       color: Colors.white,
@@ -60,33 +88,30 @@ class _ProductViewState extends State<ProductView> {
                       color: Colors.red,
                       width: 54,
                       height: 35,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
                         child: Text(
                           '7 UK',
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
                     ),
-                    customCont(
+                    const customCont(
                       text: '8 UK',
-                      fontWeight: FontWeight.normal,
                       height: 35,
                       width: 54,
                       color: Colors.white,
                     ),
-                    customCont(
+                    const customCont(
                       text: '9 UK',
-                      fontWeight: FontWeight.normal,
                       height: 35,
                       width: 54,
                       color: Colors.white,
                     ),
-                    customCont(
+                    const customCont(
                       text: '10 UK',
-                      fontWeight: FontWeight.normal,
                       height: 35,
-                      width: 54,
+                      width: 55,
                       color: Colors.white,
                     ),
                   ],
@@ -94,7 +119,7 @@ class _ProductViewState extends State<ProductView> {
               ),
               Text(
                 product.title,
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: Colors.black),
@@ -103,7 +128,7 @@ class _ProductViewState extends State<ProductView> {
                 children: [
                   RatingBarIndicator(
                     rating: product.rating?.rate ?? 0.0,
-                    itemBuilder: (context, index) => Icon(
+                    itemBuilder: (context, index) => const Icon(
                       Icons.star_rounded,
                       color: Color(0xffF2C200),
                     ),
@@ -113,7 +138,7 @@ class _ProductViewState extends State<ProductView> {
                   ),
                   Text(
                     product.rating?.count.toString() ?? '0',
-                    style: TextStyle(fontSize: 16),
+                    style: const TextStyle(fontSize: 16),
                   ),
                 ],
               ),
@@ -121,22 +146,22 @@ class _ProductViewState extends State<ProductView> {
                 children: [
                   Text(
                     r'$' '${product.price.toStringAsFixed(2)}  ',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.grey,
                       decoration: TextDecoration.lineThrough,
                     ),
                   ),
                   Text(
                     r'$' '${discountedPrice.toStringAsFixed(2)}  ',
-                    style: TextStyle(color: Colors.black),
+                    style: const TextStyle(color: Colors.black),
                   ),
-                  Text(
+                  const Text(
                     '40% off',
                     style: TextStyle(color: Colors.red),
                   ),
                 ],
               ),
-              Text(
+              const Text(
                 'Product Details',
                 style: TextStyle(
                   color: Colors.black,
@@ -144,12 +169,12 @@ class _ProductViewState extends State<ProductView> {
                   fontSize: 20,
                 ),
               ),
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
               Text(
                 product.description,
-                style: TextStyle(color: Colors.grey),
+                style: const TextStyle(color: Colors.grey),
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -157,8 +182,8 @@ class _ProductViewState extends State<ProductView> {
                     decoration: BoxDecoration(
                       border: Border.all(width: 1, color: Colors.red),
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
                       child: Text(
                         'Add To Cart',
                         style: TextStyle(
@@ -168,21 +193,27 @@ class _ProductViewState extends State<ProductView> {
                       ),
                     ),
                   ),
-                  Container(
-                    color: Colors.red,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'Add To Favorite',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, FavoriteView.id,
+                          arguments: product);
+                    },
+                    child: Container(
+                      color: Colors.red,
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          'Add To Favorite',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ),

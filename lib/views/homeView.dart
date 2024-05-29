@@ -1,16 +1,14 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:store_app/cubit_State/bottomNavBarState.dart';
 import 'package:store_app/cubits/bottomNavBarCubit.dart';
-import 'package:store_app/models/productModel.dart';
-import 'package:store_app/services/getAllProductService.dart';
+import 'package:store_app/widgets/allProductListView.dart';
+import 'package:store_app/widgets/categoriesListView.dart';
 import 'package:store_app/views/favoriteView.dart';
 import 'package:store_app/views/searchView.dart';
 import 'package:store_app/views/settingView.dart';
 import 'package:store_app/views/shopingView.dart';
-import 'package:store_app/widgets/customCard.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -31,40 +29,42 @@ class _HomeViewState extends State<HomeView> {
           return Scaffold(
             backgroundColor: Colors.white,
             appBar: AppBar(
-                elevation: 0,
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Fancy',
-                      style: TextStyle(fontSize: 28, color: Colors.black),
-                    ),
-                    Text(
-                      ' Store',
-                      style: TextStyle(fontSize: 28, color: Colors.orange),
-                    ),
-                  ],
-                )),
+              elevation: 0,
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Fancy',
+                    style: TextStyle(fontSize: 28, color: Colors.black),
+                  ),
+                  Text(
+                    ' Store',
+                    style: TextStyle(fontSize: 28, color: Colors.orange),
+                  ),
+                ],
+              ),
+            ),
             body: _buildPageContent(state.currentIndex),
             bottomNavigationBar: CurvedNavigationBar(
-                onTap: (index) {
-                  BottomNavBarCubit.get(context).changeIndex(index);
-                },
-                index: state.currentIndex,
-                backgroundColor: Colors.white,
-                color: Colors.orange,
-                height: 47,
-                items: [
-                  Icon(
-                    Icons.home,
-                    color: Colors.black,
-                    size: 38,
-                  ),
-                  Icon(Icons.search, color: Colors.black, size: 32),
-                  Icon(Icons.shopping_cart, color: Colors.black, size: 32),
-                  Icon(Icons.favorite, color: Colors.black, size: 32),
-                  Icon(Icons.settings, color: Colors.black, size: 32),
-                ]),
+              onTap: (index) {
+                BottomNavBarCubit.get(context).changeIndex(index);
+              },
+              index: state.currentIndex,
+              backgroundColor: Colors.white,
+              color: Colors.orange,
+              height: 47,
+              items: [
+                Icon(
+                  Icons.home,
+                  color: Colors.black,
+                  size: 38,
+                ),
+                Icon(Icons.search, color: Colors.black, size: 32),
+                Icon(Icons.shopping_cart, color: Colors.black, size: 32),
+                Icon(Icons.favorite, color: Colors.black, size: 32),
+                Icon(Icons.settings, color: Colors.black, size: 32),
+              ],
+            ),
           );
         },
       ),
@@ -74,35 +74,23 @@ class _HomeViewState extends State<HomeView> {
   Widget _buildPageContent(int currentIndex) {
     switch (currentIndex) {
       case 0:
-        return Padding(
-          padding: const EdgeInsets.only(left: 16, right: 16, top: 65),
-          child: FutureBuilder<List<ProductModel>>(
-            future: AllProductsService().getAllProducts(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                List<ProductModel> products = snapshot.data!;
-                return GridView.builder(
-                    itemCount: products.length,
-                    clipBehavior: Clip.none,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 1.5,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 100,
-                    ),
-                    itemBuilder: (context, index) {
-                      return CustomCard(product: products[index]);
-                    });
-              } else {
-                return Center(
-                  child: SpinKitDancingSquare(
-                    color: Colors.orange,
-                    size: 80,
-                  ),
-                );
-              }
-            },
-          ),
+        return CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: CategoriesListView(),
+            ),
+            SliverPadding(
+              padding: const EdgeInsets.only(top: 10), // Add top padding here
+            ),
+            SliverToBoxAdapter(
+              child: SizedBox(
+                  height: 80), // Add spacing between the two SliverToBoxAdapter
+            ),
+            SliverPadding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              sliver: AllProductListView(),
+            ),
+          ],
         );
       case 1:
         return Center(child: SearchView());

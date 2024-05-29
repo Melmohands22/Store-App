@@ -47,6 +47,7 @@ dependencies:
   flutter_native_splash: ^2.3.11
   flutter_bloc: ^8.1.5
   flutter_rating_bar: ^4.0.1
+  smooth_page_indicator: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -54,7 +55,7 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: "AppIcon"
-  image_path: "assets/tempest.png"
+  image_path: "assets/images/1024.png"
   min_sdk_android: 21
   remove_alpha_ios: true
 
@@ -80,6 +81,7 @@ flutter:
   assets:
     - assets/lottie/Animation - 1715643110154.json 
     - assets/images/1024.png 
+    - assets/images/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
