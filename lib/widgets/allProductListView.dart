@@ -21,8 +21,8 @@ class AllProductListView extends StatelessWidget {
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: 1.5,
-                crossAxisSpacing: 0.5,
-                mainAxisSpacing: 70, // Increase the main axis spacing here
+                crossAxisSpacing: 3,
+                mainAxisSpacing: 80, // Increase the main axis spacing here
               ),
               delegate: SliverChildBuilderDelegate(
                 (context, index) {

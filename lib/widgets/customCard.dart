@@ -13,6 +13,7 @@ class CustomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double discountedPrice = product.price * 0.60;
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, ProductView.id, arguments: product);
@@ -52,18 +53,25 @@ class CustomCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            r'$' '${product.price.toString()}',
-                            style: TextStyle(fontSize: 16, color: Colors.black),
+                            r'$' '${discountedPrice.toStringAsFixed(2)}  ',
+                            style: const TextStyle(
+                                color: Colors.black, fontSize: 18),
                           ),
-                          Container(
-                            height: 23,
-                            width: 23,
-                            child: IconButton(
-                                onPressed: () {},
-                                icon: Icon(
-                                  Icons.favorite,
-                                  color: Colors.red,
-                                )),
+                          Column(
+                            children: [
+                              Text(
+                                r'$' '${product.price.toString()}',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.black,
+                                  decoration: TextDecoration.lineThrough,
+                                ),
+                              ),
+                              const Text(
+                                '40% off',
+                                style: TextStyle(color: Colors.red),
+                              ),
+                            ],
                           )
                         ],
                       )

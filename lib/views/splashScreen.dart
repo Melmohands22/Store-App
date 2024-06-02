@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 import 'package:store_app/views/homeView.dart';
+import 'package:store_app/views/on_BoardingView.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -59,7 +60,7 @@ class _SplashScreenState extends State<SplashScreen>
           ],
         ),
       ]),
-      nextScreen: const HomeView(),
+      nextScreen: const OnBoardingView(),
       backgroundColor: Color(0xffFFE3D2),
       splashIconSize: 200,
       centered: true,
