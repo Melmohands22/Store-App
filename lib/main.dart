@@ -5,6 +5,7 @@ import 'package:store_app/views/homeView.dart';
 import 'package:store_app/views/loginView.dart';
 import 'package:store_app/views/on_BoardingView.dart';
 import 'package:store_app/views/productView.dart';
+import 'package:store_app/views/registerView.dart';
 import 'package:store_app/views/searchView.dart';
 import 'package:store_app/views/settingView.dart';
 import 'package:store_app/views/shopingView.dart';
@@ -24,6 +25,7 @@ class StoreApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
+        Registerview.id: (context) => Registerview(),
         LoginView.id: (context) => LoginView(),
         OnBoardingView.id: (context) => OnBoardingView(),
         CategoryView.id: (context) => CategoryView(),

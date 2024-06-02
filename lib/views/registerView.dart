@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:store_app/views/registerView.dart';
 import 'package:store_app/widgets/customButton.dart';
 import 'package:store_app/widgets/customTextField.dart';
 import 'package:store_app/widgets/passwordTextField.dart';
 
-class LoginView extends StatefulWidget {
-  const LoginView({
+class Registerview extends StatefulWidget {
+  const Registerview({
     super.key,
   });
-  static String id = 'LoginView';
+  static String id = 'Registerview';
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  State<Registerview> createState() => _LoginViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
+class _LoginViewState extends State<Registerview> {
   String? email, password;
 
   bool isLoading = false;
@@ -24,7 +23,8 @@ class _LoginViewState extends State<LoginView> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
+        automaticallyImplyLeading: false,
       ),
       body: Padding(
         padding: const EdgeInsets.all(24.0),
@@ -33,7 +33,7 @@ class _LoginViewState extends State<LoginView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Let\'s sign you in ',
+                'Let\'s Register Account ',
                 style: TextStyle(
                   fontSize: 38,
                   fontWeight: FontWeight.w700,
@@ -43,7 +43,7 @@ class _LoginViewState extends State<LoginView> {
                 height: 10,
               ),
               Text(
-                'Welcome Back ,                   you have been missed',
+                'Hello user , you have a greatful journey',
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.w400),
               ),
               SizedBox(
@@ -76,22 +76,28 @@ class _LoginViewState extends State<LoginView> {
                 inputType: TextInputType.number,
               ),
               SizedBox(
-                height: 5,
+                height: 15,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    'forgat password ?',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  )
-                ],
+              PasswordTextField(
+                prefixIcon: Icon(
+                  Icons.password_outlined,
+                  color: Colors.black,
+                ),
+                obscureText: true,
+                hintText: 'Confirm Password',
+                onChanged: (value) {
+                  password = value;
+                },
+                inputType: TextInputType.number,
+              ),
+              SizedBox(
+                height: 5,
               ),
               SizedBox(
                 height: 20,
               ),
               CustomButton(
-                title: 'Sign in ',
+                title: 'Sign up ',
               ),
               SizedBox(
                 height: 20,
@@ -99,11 +105,11 @@ class _LoginViewState extends State<LoginView> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Don\'t have an account ? '),
+                  Text('Already have an account ? '),
                   TextButton(
-                    child: Text('Register Now'),
+                    child: Text('Login Now'),
                     onPressed: () {
-                      Navigator.pushNamed(context, Registerview.id);
+                      Navigator.pop(context);
                     },
                   )
                 ],
