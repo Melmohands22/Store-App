@@ -1,14 +1,16 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:store_app/cubit_State/bottomNavBarState.dart';
 import 'package:store_app/cubits/bottomNavBarCubit.dart';
 import 'package:store_app/widgets/allProductListView.dart';
-import 'package:store_app/widgets/categoriesListView.dart';
+import 'package:store_app/views/categoryView.dart';
 import 'package:store_app/views/favoriteView.dart';
 import 'package:store_app/views/searchView.dart';
 import 'package:store_app/views/settingView.dart';
 import 'package:store_app/views/shopingView.dart';
+import 'package:store_app/widgets/categoryCard.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -29,6 +31,7 @@ class _HomeViewState extends State<HomeView> {
           return Scaffold(
             backgroundColor: Colors.white,
             appBar: AppBar(
+              backgroundColor: Colors.transparent,
               elevation: 0,
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -77,7 +80,70 @@ class _HomeViewState extends State<HomeView> {
         return CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
-              child: CategoriesListView(),
+              child: CarouselSlider(
+                items: [
+                  Image.network(
+                    'https://student.valuxapps.com/storage/uploads/banners/1689106848R4Nxl.photo_2023-07-11_23-08-19.png',
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
+                  Image.network(
+                    'https://student.valuxapps.com/storage/uploads/banners/1689106932hsRxm.photo_2023-07-11_23-07-53.png',
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
+                  Image.network(
+                    'https://student.valuxapps.com/storage/uploads/banners/1689110348KHwtl.sales-abstract-landing-page-with-photo_52683-28304%20(1)%20(2).png',
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
+                  Image.network(
+                    'https://student.valuxapps.com/storage/uploads/banners/1689106762vIpcq.photo_2023-07-11_23-07-38.png',
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
+                  Image.network(
+                    'https://student.valuxapps.com/storage/uploads/banners/1689107104Ezc0d.photo_2023-07-11_23-07-59.png',
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
+                ],
+                options: CarouselOptions(
+                  height: 200.0,
+                  enableInfiniteScroll: true,
+                  reverse: false,
+                  autoPlay: true,
+                  autoPlayAnimationDuration: Duration(seconds: 1),
+                  autoPlayInterval: Duration(seconds: 3),
+                  autoPlayCurve: Curves.easeIn,
+                  scrollDirection: Axis.horizontal,
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: 10,
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Text(
+                'Categories',
+                style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.w800),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: CategoryCard(), // Include the CategoryCard widget here
+            ),
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: 10,
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Text(
+                'All Products',
+                style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.w800),
+              ),
             ),
             SliverPadding(
               padding: const EdgeInsets.only(top: 10), // Add top padding here
@@ -101,7 +167,7 @@ class _HomeViewState extends State<HomeView> {
       case 4:
         return Center(child: SettinView());
       default:
-        return Center(child: Text('Home Page'));
+        return Center(child: HomeView());
     }
   }
 }

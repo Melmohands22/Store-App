@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CatgoryView extends StatelessWidget {
-  const CatgoryView({super.key, required this.category});
+  const CatgoryView(
+      {super.key, required this.category, required String categoryName});
   final String category;
   @override
   Widget build(BuildContext context) {

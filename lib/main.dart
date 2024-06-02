@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:store_app/views/categoryView.dart';
 import 'package:store_app/views/favoriteView.dart';
 import 'package:store_app/views/homeView.dart';
 import 'package:store_app/views/productView.dart';
@@ -21,6 +22,7 @@ class StoreApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
+        CategoryView.id: (context) => CategoryView(),
         ProductView.id: (context) => ProductView(),
         SettinView.id: (context) => SettinView(),
         ShopingView.id: (context) => ShopingView(),
