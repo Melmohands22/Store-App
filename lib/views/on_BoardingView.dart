@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:store_app/views/homeView.dart';
+import 'package:store_app/views/loginView.dart';
 import 'package:store_app/widgets/customOnBoarding.dart';
 
 class OnBoardingView extends StatefulWidget {
@@ -42,7 +43,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
               onPressed: () {
                 Navigator.pushAndRemoveUntil(
                     context,
-                    MaterialPageRoute(builder: (context) => HomeView()),
+                    MaterialPageRoute(builder: (context) => LoginView()),
                     (route) => false);
               },
               child: Text('Skip',
@@ -95,7 +96,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                     } else {
                       Navigator.pushAndRemoveUntil(
                           context,
-                          MaterialPageRoute(builder: (context) => HomeView()),
+                          MaterialPageRoute(builder: (context) => LoginView()),
                           (route) => false);
                     }
                   },

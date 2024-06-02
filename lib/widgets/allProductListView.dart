@@ -15,14 +15,13 @@ class AllProductListView extends StatelessWidget {
         if (snapshot.hasData) {
           List<ProductModel> products = snapshot.data!;
           return SliverPadding(
-            padding:
-                const EdgeInsets.only(top: 10), // Adjust top padding as needed
+            padding: const EdgeInsets.only(top: 10),
             sliver: SliverGrid(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: 1.5,
                 crossAxisSpacing: 3,
-                mainAxisSpacing: 80, // Increase the main axis spacing here
+                mainAxisSpacing: 80,
               ),
               delegate: SliverChildBuilderDelegate(
                 (context, index) {
