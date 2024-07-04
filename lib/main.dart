@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:store_app/shared/local_network.dart';
 import 'package:store_app/views/categoryView.dart';
 import 'package:store_app/views/favoriteView.dart';
 import 'package:store_app/views/homeView.dart';
@@ -12,7 +13,10 @@ import 'package:store_app/views/shopingView.dart';
 import 'package:store_app/views/splashScreen.dart';
 import 'package:store_app/views/updateProductView.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+ await CacheNetwork.cacheIitialization();
+ CacheNetwork.getCacheData(key: 'token');
   runApp(const StoreApp());
 }
 
@@ -25,7 +29,7 @@ class StoreApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-        Registerview.id: (context) => Registerview(),
+        RegisterView.id: (context) => RegisterView(),
         LoginView.id: (context) => LoginView(),
         OnBoardingView.id: (context) => OnBoardingView(),
         CategoryView.id: (context) => CategoryView(),

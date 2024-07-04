@@ -87,7 +87,7 @@ class _UpdateProductViewState extends State<UpdateProductView> {
                 ),
                 CustomButton(
                   title: 'Update',
-                  onTab: () async {
+                  onTap: () async {
                     isLoading = true;
                     setState(() {});
                     try {

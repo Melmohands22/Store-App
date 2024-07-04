@@ -1,60 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class PasswordTextField extends StatefulWidget {
-  PasswordTextField({
-    Key? key,
-    this.hintText,
-    this.onChanged,
-    required this.obscureText,
-    this.suffixIcon,
-    this.inputType,
-    this.prefixIcon,
-    this.color,
-  }) : super(key: key);
-
-  final String? hintText, color;
+  final String labelText;
+  final TextEditingController controller;
   final Function(String)? onChanged;
-  bool obscureText;
-  final Widget? suffixIcon;
-  TextInputType? inputType;
-  final Widget? prefixIcon;
+
+  PasswordTextField({
+    required this.labelText,
+    required this.controller,
+    this.onChanged,
+  });
 
   @override
   _PasswordTextFieldState createState() => _PasswordTextFieldState();
 }
 
 class _PasswordTextFieldState extends State<PasswordTextField> {
+  bool _obscureText = true;
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      validator: (data) {
-        if (data!.isEmpty) {
-          return 'Valid is required';
-        }
-      },
-      obscureText: widget.obscureText,
+      controller: widget.controller,
+      obscureText: _obscureText,
       onChanged: widget.onChanged,
       decoration: InputDecoration(
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.black),
-        ),
-        hintText: widget.hintText,
-        hintStyle: TextStyle(color: Colors.grey),
+        labelText: widget.labelText,
+        labelStyle: TextStyle(color: Colors.black),
+        prefixIcon: Icon(FontAwesomeIcons.lock),
         suffixIcon: IconButton(
-          onPressed: () {
-            setState(() {
-              widget.obscureText = !widget.obscureText;
-            });
-          },
           icon: Icon(
-            widget.obscureText ? Icons.visibility_off : Icons.visibility,
+            _obscureText ? Icons.visibility_off : Icons.visibility,
             color: Theme.of(context).primaryColorDark,
           ),
+          onPressed: () {
+            setState(() {
+              _obscureText = !_obscureText;
+            });
+          },
         ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(0),
-          borderSide: BorderSide(color: Colors.white),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.blue),
         ),
+        border: OutlineInputBorder(),
       ),
     );
   }

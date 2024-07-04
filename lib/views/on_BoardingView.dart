@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:store_app/views/homeView.dart';
 import 'package:store_app/views/loginView.dart';
 import 'package:store_app/widgets/customOnBoarding.dart';
 
@@ -35,7 +34,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
         title: ValueListenableBuilder<int>(
           valueListenable: _currentPageNotifier,
           builder: (context, currentPage, child) {
-            return Text('Page ${currentPage + 1} of ${data.length}');
+            return Text('Page ${currentIndex + 1} of ${data.length}');
           },
         ),
         actions: [

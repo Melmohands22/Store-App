@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 import 'package:store_app/views/homeView.dart';
 import 'package:store_app/views/on_BoardingView.dart';
+import 'package:store_app/shared/local_network.dart';
+
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -60,7 +62,7 @@ class _SplashScreenState extends State<SplashScreen>
           ],
         ),
       ]),
-      nextScreen: const OnBoardingView(),
+      nextScreen:'token'!= null && 'token' != '' ? HomeView():  const OnBoardingView(),
       backgroundColor: Color(0xffFFE3D2),
       splashIconSize: 200,
       centered: true,
