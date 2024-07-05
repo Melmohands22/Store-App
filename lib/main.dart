@@ -8,7 +8,7 @@ import 'package:store_app/views/on_BoardingView.dart';
 import 'package:store_app/views/productView.dart';
 import 'package:store_app/views/registerView.dart';
 import 'package:store_app/views/searchView.dart';
-import 'package:store_app/views/settingView.dart';
+import 'package:store_app/views/profileview.dart';
 import 'package:store_app/views/shopingView.dart';
 import 'package:store_app/views/splashScreen.dart';
 import 'package:store_app/views/updateProductView.dart';
@@ -34,7 +34,7 @@ class StoreApp extends StatelessWidget {
         OnBoardingView.id: (context) => OnBoardingView(),
         CategoryView.id: (context) => CategoryView(),
         ProductView.id: (context) => ProductView(),
-        SettinView.id: (context) => SettinView(),
+        ProfileView.id: (context) => ProfileView(),
         ShopingView.id: (context) => ShopingView(),
         SplashScreen.id: (context) => SplashScreen(),
         FavoriteView.id: (context) => FavoriteView(),

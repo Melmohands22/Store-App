@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 import 'package:store_app/views/homeView.dart';
+import 'package:store_app/views/loginView.dart';
 import 'package:store_app/views/on_BoardingView.dart';
 import 'package:store_app/shared/local_network.dart';
 
 
 class SplashScreen extends StatefulWidget {
+
   const SplashScreen({super.key});
   static String id = 'SplashScreen';
+  
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
@@ -23,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen>
     Future.delayed(const Duration(seconds: 2));
     () {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (_) => const HomeView(),
+        builder: (_) => const HomeView()
       ));
     };
   }
@@ -62,7 +65,7 @@ class _SplashScreenState extends State<SplashScreen>
           ],
         ),
       ]),
-      nextScreen:'token'!= null && 'token' != '' ? HomeView():  const OnBoardingView(),
+      nextScreen:'token'!= null && 'token' != '' ? const OnBoardingView(): HomeView() ,
       backgroundColor: Color(0xffFFE3D2),
       splashIconSize: 200,
       centered: true,

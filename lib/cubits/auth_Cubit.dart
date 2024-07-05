@@ -28,7 +28,7 @@ class AuthCubit extends Cubit<AuthState> {
         'password': password,
       };
 
-      print('Request Data: $data'); // Log the request data
+      print('Request Data: $data');
 
       final response = await _dio.post(
         "https://student.valuxapps.com/api/register",
@@ -49,7 +49,7 @@ class AuthCubit extends Cubit<AuthState> {
             message: 'Server error: ${response.statusCode}'));
       }
     } catch (e) {
-      print('Error: $e'); // Log the error
+      print('Error: $e');
       emit(AuthFaildToRegisteState(message: e.toString()));
     }
   }
@@ -78,16 +78,22 @@ class LoginCubit extends Cubit<LoginState> {
 
         },
       );
+
       if (response.statusCode == 200) {
-        var responseData = jsonDecode(response.data);
+        var responseData = response.data;
         if (response.data['status'] == true) {
           await CacheNetwork.insertToCache(key: "token", value: responseData['data']['token']);
+
           emit(LoginSuccessState());
+
         } else {
+
           emit(LoginFailedState(message: response.data['message']));
+
         }
       }
     }catch (e) {
+
       emit(LoginFailedState(message: e.toString()));
   }}
 }

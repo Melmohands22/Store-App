@@ -4,8 +4,9 @@ import 'package:store_app/cubit_State/bottomNavBarState.dart';
 import 'package:store_app/views/favoriteView.dart';
 import 'package:store_app/views/homeView.dart';
 import 'package:store_app/views/searchView.dart';
-import 'package:store_app/views/settingView.dart';
 import 'package:store_app/views/shopingView.dart';
+
+import '../views/profileview.dart';
 
 class BottomNavBarCubit extends Cubit<BottomNavBarState> {
   BottomNavBarCubit() : super(BottomNavBarState(0));
@@ -20,7 +21,7 @@ class BottomNavBarCubit extends Cubit<BottomNavBarState> {
     SearchView(),
     ShopingView(),
     FavoriteView(),
-    SettinView(),
+    ProfileView(),
   ];
 
   void changeIndex(int newIndex) {

@@ -5,11 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:store_app/cubit_State/bottomNavBarState.dart';
 import 'package:store_app/cubits/bottomNavBarCubit.dart';
+import 'package:store_app/views/profileview.dart';
 import 'package:store_app/widgets/allProductListView.dart';
-import 'package:store_app/views/categoryView.dart';
 import 'package:store_app/views/favoriteView.dart';
 import 'package:store_app/views/searchView.dart';
-import 'package:store_app/views/settingView.dart';
 import 'package:store_app/views/shopingView.dart';
 import 'package:store_app/widgets/categoryCard.dart';
 
@@ -66,7 +65,7 @@ class _HomeViewState extends State<HomeView> {
                 Icon(Icons.search, color: Colors.black, size: 32),
                 Icon(Icons.shopping_cart, color: Colors.black, size: 32),
                 Icon(Icons.favorite, color: Colors.black, size: 32),
-                Icon(Icons.settings, color: Colors.black, size: 32),
+                Icon(Icons.person_2, color: Colors.black, size: 32),
               ],
             ),
           );
@@ -174,7 +173,7 @@ class _HomeViewState extends State<HomeView> {
         case 3:
           return Center(child: FavoriteView());
         case 4:
-          return Center(child: SettinView());
+          return Center(child: ProfileView());
         default:
           return Center(child: HomeView());
       }
