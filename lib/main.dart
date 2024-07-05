@@ -15,7 +15,7 @@ import 'package:store_app/views/updateProductView.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await CacheNetwork.cacheIitialization();
+  await CacheNetwork.initializeCache();
   runApp(const StoreApp());
 }
 

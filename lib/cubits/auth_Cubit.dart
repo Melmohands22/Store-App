@@ -1,10 +1,7 @@
-import 'dart:convert';
-
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:store_app/cubit_State/auth_State.dart';
 import 'package:store_app/models/user_model.dart';
-import 'package:store_app/shared/local_network.dart';
 import 'package:store_app/shared/local_network.dart';
 
 
@@ -56,9 +53,11 @@ class AuthCubit extends Cubit<AuthState> {
   }
 }
 
+
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitialState());
-UserModel? userModel;
+
+  UserModel? userModel;
   final Dio dio = Dio();
 
   Future<void> login({
@@ -82,9 +81,9 @@ UserModel? userModel;
       if (response.statusCode == 200) {
         var responseData = response.data;
         if (responseData['status'] == true) {
-          String token = responseData['data']['token'];
-          await CacheNetwork.insertToCache(key: "token", value:userModel!.token!) ;
-          emit(LoginSuccessState());
+          userModel = UserModel.fromJson(responseData['data']);
+          await CacheNetwork.insertToCache(key: "token", value: userModel!.token!);
+          emit(LoginSuccessState(userModel: userModel!));
         } else {
           emit(LoginFailedState(message: responseData['message']));
         }
@@ -93,6 +92,46 @@ UserModel? userModel;
       }
     } catch (e) {
       emit(LoginFailedState(message: e.toString()));
+    }
+  }
+}
+
+
+class LogoutCubit extends Cubit<LogoutState> {
+  LogoutCubit() : super(LogoutInitialState());
+
+  final Dio dio = Dio();
+
+  Future<void> logout() async {
+    emit(LogoutLoadingState());
+
+    try {
+      final token = await CacheNetwork.getCacheData(key: 'token');
+
+      print('Token retrieved: $token');
+
+      final response = await dio.post(
+        "https://student.valuxapps.com/api/logout",
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer $token',
+          },
+        ),
+      );
+
+      print('Response status: ${response.statusCode}');
+      print('Response data: ${response.data}');
+
+      if (response.statusCode == 200 && response.data['status'] == true) {
+        await CacheNetwork.deleteCacheItem(key: 'token');
+        emit(LogoutSuccessState());
+      } else {
+        emit(LogoutFaildState(message: response.data['message'] ?? 'Logout failed'));
+      }
+        } catch (e) {
+      print('Error: $e');
+      emit(LogoutFaildState(message: e.toString()));
     }
   }
 }

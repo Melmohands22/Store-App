@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class CacheNetwork {
   static late SharedPreferences sharedPref;
 
-  static Future<void> cacheIitialization() async {
+  static Future<void> initializeCache() async {
     sharedPref = await SharedPreferences.getInstance();
   }
 
@@ -15,7 +15,7 @@ class CacheNetwork {
     return sharedPref.getString(key) ?? '';
   }
 
-  static Future<bool> deletCaheItem({required String key}) async {
+  static Future<bool> deleteCacheItem({required String key}) async {
     return await sharedPref.remove(key);
   }
 }

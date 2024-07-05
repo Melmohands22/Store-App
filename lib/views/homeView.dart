@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:store_app/cubit_State/bottomNavBarState.dart';
 import 'package:store_app/cubits/bottomNavBarCubit.dart';
 import 'package:store_app/views/profileview.dart';
@@ -11,6 +10,8 @@ import 'package:store_app/views/favoriteView.dart';
 import 'package:store_app/views/searchView.dart';
 import 'package:store_app/views/shopingView.dart';
 import 'package:store_app/widgets/categoryCard.dart';
+
+import '../widgets/recommended_For_You_ListView.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -151,14 +152,20 @@ class HomeContent extends StatelessWidget {
             child: SizedBox(height: 15),
           ),
           SliverToBoxAdapter(
-            child: Text(
-              'New Products',
-              style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w800),
-            ),
-          ),
-          SliverPadding(
-            padding: const EdgeInsets.only(top: 10), // Add top padding here
-          ),
+              child: Row(
+            children: [
+              Text(
+                'Trend Products',
+                style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w800),
+              ),
+              SizedBox(width: 10),
+              Icon(
+                Icons.local_fire_department,
+                color: Color(0xffB43F3F),
+                size: 36,
+              )
+            ],
+          )),
           SliverToBoxAdapter(
             child: SizedBox(height: 80), // Add spacing between the two SliverToBoxAdapter
           ),
@@ -166,6 +173,20 @@ class HomeContent extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 10),
             sliver: AllProductListView(),
           ),
+          SliverToBoxAdapter(
+            child: SizedBox(height: 15),
+          ),
+          SliverToBoxAdapter(
+              child: Text(
+                'Recommended for you',
+                style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w800),
+              )),
+          SliverToBoxAdapter(
+            child: SizedBox(height: 15),
+          ),
+          SliverToBoxAdapter(
+              child:RecommendedForYouListview()
+              ),
         ],
       ),
     );

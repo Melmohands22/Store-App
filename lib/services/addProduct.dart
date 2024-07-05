@@ -1,3 +1,4 @@
+import 'package:store_app/constant/constant.dart';
 import 'package:store_app/helper/apiClass.dart';
 import 'package:store_app/models/productModel.dart';
 
@@ -15,7 +16,8 @@ class AddProduct {
       'description': desc,
       'image': image,
       'category': category,
-    });
+          'token' : token
+    }, token: 'token', );
 
     return ProductModel.fromJson(data);
   }

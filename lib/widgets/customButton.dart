@@ -10,6 +10,7 @@ class CustomButton extends StatelessWidget {
   final Widget? suffixIcon;
 
   VoidCallback? onTap;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

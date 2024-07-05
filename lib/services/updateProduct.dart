@@ -17,7 +17,7 @@ class UpdateProductService {
       'description': desc,
       'image': image,
       'category': category,
-    });
+    }, token: 'token');
 
     return ProductModel.fromJson(data);
   }

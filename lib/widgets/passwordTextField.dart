@@ -42,8 +42,12 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.blue),
+
         ),
+
         border: OutlineInputBorder(),
+        enabledBorder: OutlineInputBorder(
+    borderSide: BorderSide(color: Colors.orange),),
       ),
     );
   }
