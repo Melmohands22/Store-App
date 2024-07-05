@@ -1,5 +1,5 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -21,6 +21,16 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  int _currentIndex = 0;
+
+  final List<Widget> _pages = [
+    HomeContent(),
+    SearchView(),
+    ShopingView(),
+    FavoriteView(),
+    ProfileView(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -30,42 +40,24 @@ class _HomeViewState extends State<HomeView> {
         builder: (BuildContext context, BottomNavBarState state) {
           return Scaffold(
             backgroundColor: Colors.white,
-            appBar: AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Fancy',
-                    style: TextStyle(fontSize: 28, color: Colors.black),
-                  ),
-                  Text(
-                    ' Store',
-                    style: TextStyle(fontSize: 28, color: Colors.orange),
-                  ),
-                ],
-              ),
-            ),
-            body: _buildPageContent(state.currentIndex),
+            appBar: _currentIndex == 0 ? _buildAppBar() : null,
+            body: _pages[_currentIndex],
             bottomNavigationBar: CurvedNavigationBar(
               onTap: (index) {
-                BottomNavBarCubit.get(context).changeIndex(index);
+                setState(() {
+                  _currentIndex = index;
+                });
               },
-              index: state.currentIndex,
+              index: _currentIndex,
               backgroundColor: Colors.white,
               color: Colors.orange,
               height: 47,
               items: [
-                Icon(
-                  Icons.home,
-                  color: Colors.black,
-                  size: 38,
-                ),
+                Icon(Icons.home, color: Colors.black, size: 38),
                 Icon(Icons.search, color: Colors.black, size: 32),
                 Icon(Icons.shopping_cart, color: Colors.black, size: 32),
                 Icon(Icons.favorite, color: Colors.black, size: 32),
-                Icon(Icons.person_2, color: Colors.black, size: 32),
+                Icon(Icons.person, color: Colors.black, size: 32),
               ],
             ),
           );
@@ -74,117 +66,108 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  Widget _buildPageContent(int currentIndex) {
-    try {
-      switch (currentIndex) {
-        case 0:
-          return Padding(
-            padding: const EdgeInsets.only(left: 8.0),
-            child: CustomScrollView(
-              slivers: [
-                SliverToBoxAdapter(
-                  child: CarouselSlider(
-                    items: [
-                      Image.network(
-                        'https://student.valuxapps.com/storage/uploads/banners/1689106848R4Nxl.photo_2023-07-11_23-08-19.png',
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
-                      Image.network(
-                        'https://student.valuxapps.com/storage/uploads/banners/1689106932hsRxm.photo_2023-07-11_23-07-53.png',
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
-                      Image.network(
-                        'https://student.valuxapps.com/storage/uploads/banners/1689110348KHwtl.sales-abstract-landing-page-with-photo_52683-28304%20(1)%20(2).png',
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
-                      Image.network(
-                        'https://student.valuxapps.com/storage/uploads/banners/1689106762vIpcq.photo_2023-07-11_23-07-38.png',
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
-                      Image.network(
-                        'https://student.valuxapps.com/storage/uploads/banners/1689107104Ezc0d.photo_2023-07-11_23-07-59.png',
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
-                    ],
-                    options: CarouselOptions(
-                      height: 150.0,
-                      enableInfiniteScroll: true,
-                      reverse: false,
-                      autoPlay: true,
-                      autoPlayAnimationDuration: Duration(seconds: 1),
-                      autoPlayInterval: Duration(seconds: 3),
-                      autoPlayCurve: Curves.easeIn,
-                      scrollDirection: Axis.horizontal,
-                    ),
-                  ),
+  AppBar _buildAppBar() {
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'Fancy',
+            style: TextStyle(fontSize: 28, color: Colors.black),
+          ),
+          Text(
+            ' Store',
+            style: TextStyle(fontSize: 28, color: Colors.orange),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class HomeContent extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 8.0),
+      child: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: CarouselSlider(
+              items: [
+                Image.network(
+                  'https://student.valuxapps.com/storage/uploads/banners/1689106848R4Nxl.photo_2023-07-11_23-08-19.png',
+                  width: double.infinity,
+                  fit: BoxFit.cover,
                 ),
-                SliverToBoxAdapter(
-                  child: SizedBox(
-                    height: 10,
-                  ),
+                Image.network(
+                  'https://student.valuxapps.com/storage/uploads/banners/1689106932hsRxm.photo_2023-07-11_23-07-53.png',
+                  width: double.infinity,
+                  fit: BoxFit.cover,
                 ),
-                SliverToBoxAdapter(
-                  child: Text(
-                    'Categories',
-                    style:
-                        TextStyle(fontSize: 28.0, fontWeight: FontWeight.w800),
-                  ),
+                Image.network(
+                  'https://student.valuxapps.com/storage/uploads/banners/1689110348KHwtl.sales-abstract-landing-page-with-photo_52683-28304%20(1)%20(2).png',
+                  width: double.infinity,
+                  fit: BoxFit.cover,
                 ),
-                SliverToBoxAdapter(
-                  child: CategoryCard(), // Include the CategoryCard widget here
+                Image.network(
+                  'https://student.valuxapps.com/storage/uploads/banners/1689106762vIpcq.photo_2023-07-11_23-07-38.png',
+                  width: double.infinity,
+                  fit: BoxFit.cover,
                 ),
-                SliverToBoxAdapter(
-                  child: SizedBox(
-                    height: 15,
-                  ),
-                ),
-                SliverToBoxAdapter(
-                  child: Text(
-                    'New Products',
-                    style:
-                        TextStyle(fontSize: 28.0, fontWeight: FontWeight.w800),
-                  ),
-                ),
-                SliverPadding(
-                  padding:
-                      const EdgeInsets.only(top: 10), // Add top padding here
-                ),
-                SliverToBoxAdapter(
-                  child: SizedBox(
-                    height: 80,
-                  ), // Add spacing between the two SliverToBoxAdapter
-                ),
-                SliverPadding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  sliver: AllProductListView(),
+                Image.network(
+                  'https://student.valuxapps.com/storage/uploads/banners/1689107104Ezc0d.photo_2023-07-11_23-07-59.png',
+                  width: double.infinity,
+                  fit: BoxFit.cover,
                 ),
               ],
+              options: CarouselOptions(
+                height: 150.0,
+                enableInfiniteScroll: true,
+                reverse: false,
+                autoPlay: true,
+                autoPlayAnimationDuration: Duration(seconds: 1),
+                autoPlayInterval: Duration(seconds: 3),
+                autoPlayCurve: Curves.easeIn,
+                scrollDirection: Axis.horizontal,
+              ),
             ),
-          );
-        case 1:
-          return Center(child: SearchView());
-        case 2:
-          return Center(child: ShopingView());
-        case 3:
-          return Center(child: FavoriteView());
-        case 4:
-          return Center(child: ProfileView());
-        default:
-          return Center(child: HomeView());
-      }
-    } catch (error) {
-      // Log the error and return a placeholder widget
-      print("Error in _buildPageContent: $error");
-      return Center(
-          child: SpinKitDancingSquare(
-        color: Colors.orange,
-        size: 40,
-      ));
-    }
+          ),
+          SliverToBoxAdapter(
+            child: SizedBox(height: 10),
+          ),
+          SliverToBoxAdapter(
+            child: Text(
+              'Categories',
+              style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w800),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: CategoryCard(), // Include the CategoryCard widget here
+          ),
+          SliverToBoxAdapter(
+            child: SizedBox(height: 15),
+          ),
+          SliverToBoxAdapter(
+            child: Text(
+              'New Products',
+              style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w800),
+            ),
+          ),
+          SliverPadding(
+            padding: const EdgeInsets.only(top: 10), // Add top padding here
+          ),
+          SliverToBoxAdapter(
+            child: SizedBox(height: 80), // Add spacing between the two SliverToBoxAdapter
+          ),
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            sliver: AllProductListView(),
+          ),
+        ],
+      ),
+    );
   }
 }

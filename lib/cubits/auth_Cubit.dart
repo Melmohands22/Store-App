@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:store_app/cubit_State/auth_State.dart';
+import 'package:store_app/models/user_model.dart';
 import 'package:store_app/shared/local_network.dart';
 import 'package:store_app/shared/local_network.dart';
 
@@ -57,7 +58,7 @@ class AuthCubit extends Cubit<AuthState> {
 
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitialState());
-
+UserModel? userModel;
   final Dio dio = Dio();
 
   Future<void> login({
@@ -75,25 +76,23 @@ class LoginCubit extends Cubit<LoginState> {
         data: {
           'email': email,
           'password': password,
-
         },
       );
 
       if (response.statusCode == 200) {
         var responseData = response.data;
-        if (response.data['status'] == true) {
-          await CacheNetwork.insertToCache(key: "token", value: responseData['data']['token']);
-
+        if (responseData['status'] == true) {
+          String token = responseData['data']['token'];
+          await CacheNetwork.insertToCache(key: "token", value:userModel!.token!) ;
           emit(LoginSuccessState());
-
         } else {
-
-          emit(LoginFailedState(message: response.data['message']));
-
+          emit(LoginFailedState(message: responseData['message']));
         }
+      } else {
+        emit(LoginFailedState(message: "Login failed with status code: ${response.statusCode}"));
       }
-    }catch (e) {
-
+    } catch (e) {
       emit(LoginFailedState(message: e.toString()));
-  }}
+    }
+  }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:store_app/cubit_State/auth_State.dart';
 import 'package:store_app/cubits/auth_Cubit.dart';
@@ -8,6 +7,7 @@ import 'package:store_app/views/homeView.dart';
 import 'package:store_app/widgets/customButton.dart';
 import 'package:store_app/widgets/customTextField.dart';
 import 'package:store_app/widgets/passwordTextField.dart';
+
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -51,7 +51,7 @@ class _LoginViewState extends State<LoginView> {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text('Login Successful!')),
               );
-              Navigator.pushNamed(context, HomeView.id);
+              Navigator.pushReplacementNamed(context, HomeView.id);
             } else if (state is LoginFailedState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text(state.message)),

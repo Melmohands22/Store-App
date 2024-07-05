@@ -13,10 +13,9 @@ import 'package:store_app/views/shopingView.dart';
 import 'package:store_app/views/splashScreen.dart';
 import 'package:store_app/views/updateProductView.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
- await CacheNetwork.cacheIitialization();
- CacheNetwork.getCacheData(key: 'token');
+  await CacheNetwork.cacheIitialization();
   runApp(const StoreApp());
 }
 

@@ -51,7 +51,7 @@ class _RegisterViewState extends State<RegisterView> {
               });
             }
             if (state is AuthSuccessToRegisteState) {
-              Navigator.pushNamed(context, HomeView.id);
+              Navigator.pushReplacementNamed(context, HomeView.id);
             } else if (state is AuthFaildToRegisteState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text(state.message)),
