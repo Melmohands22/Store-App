@@ -13,25 +13,40 @@ class RecommendedForYouListview extends StatelessWidget {
       future: RecommendedProductService().getRecommendedProducts(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: SpinKitDancingSquare(color: Colors.orange, size: 80));
+          return SliverFillRemaining(
+            child: Center(
+              child: SpinKitDancingSquare(color: Colors.orange, size: 80),
+            ),
+          );
         } else if (snapshot.hasError) {
-          return Center(child: Text('Error: ${snapshot.error}'));
+          return SliverFillRemaining(
+            child: Center(
+              child: Text('Error: ${snapshot.error}'),
+            ),
+          );
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return Center(child: Text('No products available'));
+          return SliverFillRemaining(
+            child: Center(
+              child: Text('No products available'),
+            ),
+          );
         } else {
           List<RecommendedProductModel> recommendedProducts = snapshot.data!;
           return SliverPadding(
-            padding: const EdgeInsets.only(top: 10),
+            padding: const EdgeInsets.only(top: 25),
             sliver: SliverGrid(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 1.5,
-                crossAxisSpacing: 3,
-                mainAxisSpacing: 80,
+                childAspectRatio: 1.1,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 70,
               ),
               delegate: SliverChildBuilderDelegate(
                     (context, index) {
-                  return Recommendedcard(recommendProduct: recommendedProducts[index]);
+                  return SizedBox(
+                    width: double.infinity,
+                    child: RecommendedCard(recommendProduct: recommendedProducts[index]),
+                  );
                 },
                 childCount: recommendedProducts.length,
               ),

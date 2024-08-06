@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:store_app/models/productModel.dart';
 import 'package:store_app/services/getAllProductService.dart';
 import 'package:store_app/widgets/customCard.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class AllProductListView extends StatelessWidget {
-  const AllProductListView({Key? key});
+  const AllProductListView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +21,11 @@ class AllProductListView extends StatelessWidget {
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: 1.5,
-                crossAxisSpacing: 3,
+                crossAxisSpacing: 10,
                 mainAxisSpacing: 80,
               ),
               delegate: SliverChildBuilderDelegate(
-                (context, index) {
+                    (context, index) {
                   return CustomCard(product: products[index]);
                 },
                 childCount: products.length,

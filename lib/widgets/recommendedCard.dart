@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import '../models/recommended_Model.dart';
-import '../views/productView.dart';
+import '../views/recommended _ProductView.dart';
 
-class Recommendedcard extends StatelessWidget {
+class RecommendedCard extends StatelessWidget {
    RecommendedProductModel recommendProduct;
 
-   Recommendedcard({
+   RecommendedCard({
     Key? key,
     required this.recommendProduct,
   }) : super(key: key);
@@ -15,12 +15,20 @@ class Recommendedcard extends StatelessWidget {
     final double discountedPrice = recommendProduct.price * 0.60;
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, ProductView.id, arguments: recommendProduct);
+        Navigator.pushNamed(
+          context,
+          RecommendedProductView.id,
+          arguments: recommendProduct,
+        );
       },
       child: Stack(
         clipBehavior: Clip.none,
         children: [
           Container(
+            constraints: BoxConstraints(
+              maxWidth: 200,
+              maxHeight: 300,
+            ),
             decoration: BoxDecoration(boxShadow: [
               BoxShadow(
                   blurRadius: 40,
@@ -41,8 +49,8 @@ class Recommendedcard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      recommendProduct.description.substring(0, 6),
-                      style: TextStyle(fontSize: 16, color: Colors.grey),
+                      recommendProduct.name.substring(0, 8),
+                      style: TextStyle(fontSize: 18, color: Colors.grey),
                     ),
                     SizedBox(height: 3),
                     Row(
@@ -51,14 +59,14 @@ class Recommendedcard extends StatelessWidget {
                         Text(
                           r'$' '${discountedPrice.toStringAsFixed(2)}  ',
                           style: const TextStyle(
-                              color: Colors.black, fontSize: 18),
+                              color: Colors.black, fontSize: 16),
                         ),
                         Column(
                           children: [
                             Text(
                               r'$' '${recommendProduct.price.toString()}',
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize:12,
                                 color: Colors.black,
                                 decoration: TextDecoration.lineThrough,
                               ),
@@ -78,11 +86,14 @@ class Recommendedcard extends StatelessWidget {
           ),
           Positioned(
             right: 32,
-            top: -60,
-            child: Image.network(
-              recommendProduct.image,
+            top: -40,
+            child: SizedBox(
+              width: 110,
               height: 100,
-              width: 100,
+              child: Image.network(
+                recommendProduct.image,
+                fit: BoxFit.cover, // Ensure the image fits within constraints
+              ),
             ),
           )
         ],

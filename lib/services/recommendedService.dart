@@ -7,7 +7,7 @@ class RecommendedProductService {
 
   RecommendedProductService() {
     dio.options.headers['Content-Type'] = 'application/json';
-    dio.options.headers['Authorization'] = 's0aLQeOslWbjlgrdZAj8OzwsfCcPBuYr61Yokcko0SFdg5MoNzIQFKr74LKwENowOxto8Y';
+    dio.options.headers['Authorization'] = 'token';
   }
 
   Future<List<RecommendedProductModel>> getRecommendedProducts() async {

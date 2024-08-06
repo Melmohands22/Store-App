@@ -1,7 +1,7 @@
 class RecommendedProductModel {
   final int id;
-  final int price;
-  final int oldPrice;
+  final double price;
+  final double oldPrice;
   final int discount;
   final String image;
   final String name;
@@ -26,8 +26,8 @@ class RecommendedProductModel {
   factory RecommendedProductModel.fromJson(Map<String, dynamic> jsonData) {
     return RecommendedProductModel(
       id: jsonData['id'] ?? 0,
-      price: jsonData['price'] ?? 0,
-      oldPrice: jsonData['old_price'] ?? 0,
+      price: jsonData['price'] is int ? (jsonData['price'] as int).toDouble() : jsonData['price'],
+      oldPrice: jsonData['old_price'] is int ? (jsonData['old_price'] as int).toDouble() : jsonData['old_price'],
       discount: jsonData['discount'] ?? 0,
       image: jsonData['image'] ?? '',
       name: jsonData['name'] ?? '',

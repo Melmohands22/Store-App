@@ -10,7 +10,6 @@ import 'package:store_app/views/favoriteView.dart';
 import 'package:store_app/views/searchView.dart';
 import 'package:store_app/views/shopingView.dart';
 import 'package:store_app/widgets/categoryCard.dart';
-
 import '../widgets/recommended_For_You_ListView.dart';
 
 class HomeView extends StatefulWidget {
@@ -87,15 +86,14 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 }
-
 class HomeContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 8.0),
-      child: CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(
+    return CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(
+          child: SizedBox(
+            height: 150.0,
             child: CarouselSlider(
               items: [
                 Image.network(
@@ -136,23 +134,30 @@ class HomeContent extends StatelessWidget {
               ),
             ),
           ),
-          SliverToBoxAdapter(
-            child: SizedBox(height: 10),
+        ),
+        SliverToBoxAdapter(
+          child: SizedBox(height: 10),
+        ),
+        SliverToBoxAdapter(
+          child: Text(
+            'Categories',
+            style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w800),
           ),
-          SliverToBoxAdapter(
-            child: Text(
-              'Categories',
-              style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w800),
-            ),
+        ),
+        SliverToBoxAdapter(
+          child: SizedBox(
+            height: 120,
+            child: CategoryCard(),
           ),
-          SliverToBoxAdapter(
-            child: CategoryCard(), // Include the CategoryCard widget here
-          ),
-          SliverToBoxAdapter(
-            child: SizedBox(height: 15),
-          ),
-          SliverToBoxAdapter(
-              child: Row(
+        ),
+        SliverToBoxAdapter(
+          child: SizedBox(height: 15),
+        ),
+        SliverPadding(
+          padding: const EdgeInsets.only(top: 10), // Add top padding here
+        ),
+        SliverToBoxAdapter(
+          child: Row(
             children: [
               Text(
                 'Trend Products',
@@ -165,30 +170,33 @@ class HomeContent extends StatelessWidget {
                 size: 36,
               )
             ],
-          )),
-          SliverToBoxAdapter(
-            child: SizedBox(height: 80), // Add spacing between the two SliverToBoxAdapter
           ),
-          SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            sliver: AllProductListView(),
+        ),
+        SliverToBoxAdapter(
+          child: SizedBox(height: 60),
+        ),
+
+        SliverPadding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          sliver: AllProductListView(),
+        ),
+        SliverToBoxAdapter(
+          child: SizedBox(height: 15),
+        ),
+        SliverToBoxAdapter(
+          child: Text(
+            'Recommended for you',
+            style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w800),
           ),
-          SliverToBoxAdapter(
-            child: SizedBox(height: 15),
-          ),
-          SliverToBoxAdapter(
-              child: Text(
-                'Recommended for you',
-                style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w800),
-              )),
-          SliverToBoxAdapter(
-            child: SizedBox(height: 15),
-          ),
-          SliverToBoxAdapter(
-              child:RecommendedForYouListview()
-              ),
-        ],
-      ),
+        ),
+        SliverToBoxAdapter(
+          child: SizedBox(height: 15),
+        ),
+        SliverPadding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          sliver: RecommendedForYouListview(),
+        ),
+      ],
     );
   }
 }
