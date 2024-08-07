@@ -18,7 +18,7 @@ class ShopingView extends StatelessWidget {
         ),
       ),
       body: cartProducts.isEmpty
-          ? Center(child: Text('No favorite products'))
+          ? Center(child: Text('No Cart products'))
           : ListView.builder(
         itemCount: cartProducts.length,
         itemBuilder: (context, index) {

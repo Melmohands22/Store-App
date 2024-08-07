@@ -197,10 +197,10 @@ class _ProductViewState extends State<RecommendedProductView> {
                     onTap: () {
                       final cartProvider = Provider.of<RecommendedCartProvider>(context, listen: false);
                       if (cartProvider.isRecommendedProductInCart(recommendedProduct)) {
-                        showCustomDialog(context, 'Product is already in favorites!');
+                        showCustomDialog(context, 'Product is already in cart!');
                       } else {
                         cartProvider.addRecommendedProductToCart(recommendedProduct);
-                        showCustomDialog(context, 'Product added to favorites!');
+                        showCustomDialog(context, 'Product added to cart!');
                       }
                     },
                     child: Container( decoration: BoxDecoration(
@@ -223,10 +223,10 @@ class _ProductViewState extends State<RecommendedProductView> {
                     onTap: () {
                       final favoriteProvider = Provider.of<RecommendedFavoriteProvider>(context, listen: false);
                       if (favoriteProvider.isRecommendedProductInFavorites(recommendedProduct)) {
-                        showCustomDialog(context, 'Product is already in cart!');
+                        showCustomDialog(context, 'Product is already in Favorite!');
                       } else {
                         favoriteProvider.addRecommendedProductToFavorites(recommendedProduct);
-                        showCustomDialog(context, 'Product added to cart!');
+                        showCustomDialog(context, 'Product added to Favorite!');
                       }
                     },
                     child: Container(

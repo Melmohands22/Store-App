@@ -29,7 +29,7 @@ class FavoriteView extends StatelessWidget {
                 return ListTile(
                   leading: Image.network(product.image, width: 80, height: 50),
                   title: Text(product.name),
-                  subtitle: Text(product.description),
+                  subtitle: Text(product.description.substring(0, 50),),
                   trailing: Text(r'$' '${product.price.toStringAsFixed(2)}'),
                 );
               },

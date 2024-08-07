@@ -75,8 +75,8 @@ class _ProfileViewState extends State<ProfileView> {
                                 ),
                               ),
                               Positioned(
-                                bottom: 2,
-                                left: 230,
+                                bottom: 4,
+                                left: 200,
                                 child: CircleAvatar(
                                   backgroundColor:
                                   const Color(0xffEEEEEE),
