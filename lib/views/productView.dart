@@ -43,7 +43,6 @@ class _ProductViewState extends State<ProductView> {
     final ProductModel product = ModalRoute.of(context)!.settings.arguments as ProductModel;
 
     final double discountedPrice = product.price * 0.60;
-    final favoriteProvider = Provider.of<RecommendedFavoriteProvider>(context);
 
     return Scaffold(
       appBar: AppBar(

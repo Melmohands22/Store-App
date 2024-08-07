@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:store_app/providers/cart_provider.dart';
 import 'package:store_app/providers/favorite_provider.dart';
 import 'package:store_app/shared/local_network.dart';
 import 'package:store_app/views/categoryView.dart';
@@ -31,6 +32,7 @@ class StoreApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => RecommendedFavoriteProvider()),
         ChangeNotifierProvider(create: (_) => FavoriteProvider()),
+        ChangeNotifierProvider(create: (_) => RecommendedCartProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

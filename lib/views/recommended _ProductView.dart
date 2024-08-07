@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../models/recommended_Model.dart';
+import '../providers/cart_provider.dart';
 import '../providers/favorite_provider.dart';
 import '../widgets/custtomCont.dart';
 
@@ -192,29 +193,40 @@ class _ProductViewState extends State<RecommendedProductView> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
+                  GestureDetector(
+                    onTap: () {
+                      final cartProvider = Provider.of<RecommendedCartProvider>(context, listen: false);
+                      if (cartProvider.isRecommendedProductInCart(recommendedProduct)) {
+                        showCustomDialog(context, 'Product is already in favorites!');
+                      } else {
+                        cartProvider.addRecommendedProductToCart(recommendedProduct);
+                        showCustomDialog(context, 'Product added to favorites!');
+                      }
+                    },
+                    child: Container( decoration: BoxDecoration(
                       border: Border.all(width: 1, color: Colors.red),
                     ),
-                    child: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
-                        'Add To Cart',
-                        style: TextStyle(
-                            color: Colors.red,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          'Add To Cart',
+                          style: TextStyle(
+                              color: Colors.red,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
                   ),
+
                   GestureDetector(
                     onTap: () {
                       final favoriteProvider = Provider.of<RecommendedFavoriteProvider>(context, listen: false);
                       if (favoriteProvider.isRecommendedProductInFavorites(recommendedProduct)) {
-                        showCustomDialog(context, 'Product is already in favorites!');
+                        showCustomDialog(context, 'Product is already in cart!');
                       } else {
                         favoriteProvider.addRecommendedProductToFavorites(recommendedProduct);
-                        showCustomDialog(context, 'Product added to favorites!');
+                        showCustomDialog(context, 'Product added to cart!');
                       }
                     },
                     child: Container(
