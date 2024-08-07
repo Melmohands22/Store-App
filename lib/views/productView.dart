@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:provider/provider.dart';
 import 'package:store_app/models/productModel.dart';
-import 'package:store_app/views/favoriteView.dart';
+import 'package:store_app/providers/favorite_provider.dart';
 import 'package:store_app/widgets/custtomCont.dart';
 
 class ProductView extends StatefulWidget {
-  const ProductView({
-    Key? key,
-  }) : super(key: key);
+  const ProductView({Key? key}) : super(key: key);
 
   static String id = 'ProductView';
 
@@ -19,12 +18,32 @@ class ProductView extends StatefulWidget {
 class _ProductViewState extends State<ProductView> {
   final PageController pageController = PageController();
 
+  void showCustomDialog(BuildContext context, String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Notification'),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final ProductModel product =
-        ModalRoute.of(context)!.settings.arguments as ProductModel;
+    final ProductModel product = ModalRoute.of(context)!.settings.arguments as ProductModel;
 
     final double discountedPrice = product.price * 0.60;
+    final favoriteProvider = Provider.of<RecommendedFavoriteProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -58,7 +77,7 @@ class _ProductViewState extends State<ProductView> {
               const SizedBox(height: 8),
               Center(
                 child: SmoothPageIndicator(
-                  controller: pageController, // Assign the PageController here
+                  controller: pageController,
                   count: 3,
                   effect: ExpandingDotsEffect(
                     dotHeight: 8,
@@ -195,8 +214,13 @@ class _ProductViewState extends State<ProductView> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, FavoriteView.id,
-                          arguments: product);
+                      final favoriteProvider = Provider.of<FavoriteProvider>(context, listen: false);
+                      if (favoriteProvider.isProductInFavorites(product)) {
+                        showCustomDialog(context, 'Product is already in favorites!');
+                      } else {
+                        favoriteProvider.addProductToFavorites(product);
+                        showCustomDialog(context, 'Product added to favorites!');
+                      }
                     },
                     child: Container(
                       color: Colors.red,

@@ -209,11 +209,11 @@ class _ProductViewState extends State<RecommendedProductView> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      final favoriteProvider = Provider.of<FavoriteProvider>(context, listen: false);
-                      if (favoriteProvider.isProductInFavorites(recommendedProduct)) {
+                      final favoriteProvider = Provider.of<RecommendedFavoriteProvider>(context, listen: false);
+                      if (favoriteProvider.isRecommendedProductInFavorites(recommendedProduct)) {
                         showCustomDialog(context, 'Product is already in favorites!');
                       } else {
-                        favoriteProvider.addProductToFavorites(recommendedProduct);
+                        favoriteProvider.addRecommendedProductToFavorites(recommendedProduct);
                         showCustomDialog(context, 'Product added to favorites!');
                       }
                     },
